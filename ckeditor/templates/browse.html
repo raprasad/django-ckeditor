@@ -1,141 +1,124 @@
+{% load humanize %}
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title>CKEDitor | Select an image to embed</title>
-		<link rel="stylesheet" href="{{ media_prefix }}galleriffic/css/basic.css" type="text/css" />
-		<link rel="stylesheet" href="{{ media_prefix }}galleriffic/css/galleriffic-2.css" type="text/css" />
-		<script type="text/javascript" src="{{ media_prefix}}galleriffic/js/jquery-1.3.2.js"></script>
-		<script type="text/javascript" src="{{ media_prefix }}galleriffic/js/jquery.galleriffic.js"></script>
-		<script type="text/javascript" src="{{ media_prefix}}galleriffic/js/jquery.opacityrollover.js"></script>
-		<!-- We only want the thunbnails to display when javascript is disabled -->
-		<script type="text/javascript">
-			document.write('<style>.noscript { display: none; }</style>');
-		</script>
+
+    <link href="{{ STATIC_URL }}file_browser.css" rel="stylesheet" type="text/css" media="screen" />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<!-- We only want the thunbnails to display when javascript is disabled -->
+<script type="text/javascript">
+<!--
+
+function load_directory_contents(){
+    var curdir = $('#current_folder').val();
+    var cur_sort_field = $('#current_sort').val(); 
+    var dir_data = { d : curdir, sf : cur_sort_field };
+
+    //alert('load_directory_contents: ' + curdir);
+    $.getJSON("{% url ckeditor_browse_ajax %}", dir_data, function(data){
+        //alert(data);
+        if (data.success == false){
+            //alert(data.msg);
+            $('#msg_div').html(data.msg);
+            return;
+        }
+        
+        if (data.success == true){    
+            $('#msg_div').html(data.msg);
+            $('#id_directory_details').html(data.dir_files_html);
+            //hange_email_sep(default_sep);
+            //$('#id_email_addresses').select();
+            bind_choose_file_links();   
+            bind_choose_dir_links();        
+            bind_sort_links();    
+            return;
+        }
+
+        alert('Sorry!  The request did not work.  Please try again.');
+        
+    });
+}
+    
+    /* click on a directory name and load that directory */
+    function bind_choose_dir_links(){
+         $('.lnk_choose_folder').click(function() {
+             $('#current_folder').val(this.rel);
+             load_directory_contents();
+        });        
+    }
+    
+    /* click on a column header to sort  */
+    function bind_sort_links(){
+         $('.lnk_sort_col').click(function() {
+             if ( $('#current_sort').val()==this.rel){
+                 $('#current_sort').val('-'+this.rel);                 
+
+             }else{
+                 $('#current_sort').val(this.rel);                 
+             }
+             load_directory_contents();
+        });
+    }
+    
+    /* hover over a file name to preview it */
+    function bind_choose_file_links(){
+        $('.lnk_choose_img_file').hover(function() {
+                //alert(this.rel);
+                  lnk_img_url = '{{ MEDIA_URL }}editor_uploads' + this.rel;
+                  selected_img_tag = '<img src="' + lnk_img_url + '" style=\"max-width:300px;\" />';
+
+                  $('#file_preview').html(selected_img_tag);
+                });
+                
+      /* double-click a file name and send it to the browser */
+      $('.lnk_choose_file').dblclick(function() {
+            //lnk_img_url = 'http://127.0.0.1:8000/media-mcb/imgs/news/thumb/' + this.rel;
+            var embed_rel = '{{ MEDIA_URL }}editor_uploads/' + this.rel;            
+            alert(embed_rel);
+            var funcNum = '2'; //getUrlParam('CKEditorFuncNum');
+            window.opener.CKEDITOR.tools.callFunction(funcNum, embed_rel);
+            window.close();
+      });
+        
+    }
+    
+    
+      $(document).ready( function() {
+            load_directory_contents()
+        });
+-->        
+</script>
 	</head>
 	<body>
-		<div id="page">
+	    <h3>File Browser: Please select a file on the server</h3>
+	        <div id="file_target"></div>
 			<div id="container">
-                {% if images %}
-    				<h2>Browse for the image you want, then click 'Embed Image' to continue...</h2>
-                {% else %}
-				    <h2>No images found. Upload images using the 'Image Button' dialog's 'Upload' tab.</h2>
-                {% endif %}
+			    
+			  <div id="msg_div"></div>
+			    
+			    {% if directory_details %}
+                <div style="float:left;">
+		            <div id="id_directory_details">
+    			        {% include "browse_ajax.html" %}
+    		        </div>
+    			</div>
+			    {% endif %}
 
-				<!-- Start Advanced Gallery Html Containers -->
-				<div id="gallery" class="content">
-					<div class="slideshow-container">
-						<div id="loading" class="loader"></div>
-						<div id="slideshow" class="slideshow"></div>
-					</div>
-					<div id="caption" class="caption-container"></div>
-				</div>
-				<div id="thumbs" class="navigation">
-					<ul class="thumbs noscript">
-                        {% for image in images %}
-						<li>
-							<a class="thumb" href="{{ image.src }}">
-								<img src="{{ image.thumb }}" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a class="embed" href="{{ image.src }}">Embed Image</a>
-								</div>
-							</div>
-						</li>
-                        {% endfor %}
-					</ul>
-				</div>
+    			<div style="float:left; padding:10px;margin:0 5px; width:320px;border:1px solid #ccc;">
+                    <b>Image Preview</b>
+                    <p>Note: Regardless of actual sizes, preview images are shown with a maximum width of 300px.
+                    <div id="file_preview">(no preview selected)</div>
+                    <br />
+                    <div id="file_display"></div>
+			    </div>
+			    
+       
+
+				
 				<div style="clear: both;"></div>
 			</div>
-		</div>
-		<script type="text/javascript">
-            // helper functions
-            function getUrlParam(paramName) {
-                var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i') ;
-                var match = window.location.search.match(reParam) ;
- 
-                return (match && match.length > 1) ? match[1] : '' ;
-            }
-            function scale_image() {
-                var max_width = 500;
-                var image = $(".advance-link > img");
-                var image_width = image.width();
-                if (image_width > max_width) {
-                    var aspect = image.height() / image_width;
-                    var image_height = max_width * aspect;
-                    image.width(max_width);
-                    image.height(image_height);
-                }
-            }
-
-            // embedder
-            $('.embed').live('click', function() {
-                var funcNum = getUrlParam('CKEditorFuncNum');
-                var fileUrl = $(this).attr('href');
-                window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl);
-                window.close();
-            });
-
-            // galleriffic
-			jQuery(document).ready(function($) {
-				// We only want these styles applied when javascript is enabled
-				$('div.navigation').css({'width' : '300px', 'float' : 'left'});
-				$('div.content').css('display', 'block');
-
-				// Initially set opacity on thumbs and add
-				// additional styling for hover effect on thumbs
-				var onMouseOutOpacity = 0.67;
-				$('#thumbs ul.thumbs li').opacityrollover({
-					mouseOutOpacity:   onMouseOutOpacity,
-					mouseOverOpacity:  1.0,
-					fadeSpeed:         'fast',
-					exemptionSelector: '.selected'
-				});
-			
-				// Initialize Advanced Galleriffic Gallery
-				var gallery = $('#thumbs').galleriffic({
-					delay:                     2500,
-					numThumbs:                 15,
-					preloadAhead:              10,
-					enableTopPager:            true,
-					enableBottomPager:         true,
-					maxPagesToShow:            7,
-					imageContainerSel:         '#slideshow',
-					controlsContainerSel:      '#controls',
-					captionContainerSel:       '#caption',
-					loadingContainerSel:       '#loading',
-					renderSSControls:          true,
-					renderNavControls:         true,
-					playLinkText:              'Play Slideshow',
-					pauseLinkText:             'Pause Slideshow',
-					prevLinkText:              '&lsaquo; Previous Photo',
-					nextLinkText:              'Next Photo &rsaquo;',
-					nextPageLinkText:          'Next &rsaquo;',
-					prevPageLinkText:          '&lsaquo; Prev',
-					enableHistory:             false,
-					autoStart:                 false,
-					syncTransitions:           false,
-					defaultTransitionDuration: 500,
-					onSlideChange:             function(prevIndex, nextIndex) {
-						// 'this' refers to the gallery, which is an extension of $('#thumbs')
-						this.find('ul.thumbs').children()
-							.eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end()
-							.eq(nextIndex).fadeTo('fast', 1.0);
-					},
-					onPageTransitionOut:       function(callback) {
-						this.fadeTo('fast', 0.0, callback);
-					},
-					onPageTransitionIn:        function() {
-						this.fadeTo('fast', 1.0);
-					},
-					onTransitionIn:        function(newSlide, newCaption, isSync) {
-                        scale_image();
-					    newSlide.fadeTo(this.getDefaultTransitionDuration(isSync), 1.0);
-					    if (newCaption)
-    						newCaption.fadeTo(this.getDefaultTransitionDuration(isSync), 1.0);
-					}
-				});
-			});
-		</script>
 	</body>
 </html>

@@ -1,0 +1,52 @@
+{% load humanize %}
+
+{% if directory_details %}
+<b>Number item{{ directory_details.num_items|pluralize }}: {{ directory_details.num_items|intcomma }}</b>
+
+{% if directory_details.directory_parts %}
+<p>directory: 
+    {% for dp in directory_details.directory_parts %}{% spaceless %}
+        {% if not forloop.first %} / {% endif %}
+        <a rel="{{ dp.dir_path }}" class="lnk_choose_folder">{% if forloop.last %}<b>{{ dp.folder_name }}</b>{% else %}{{ dp.folder_name }}{% endif %}</a>
+    {% endspaceless %}{% endfor %} 
+</p>
+{% endif %}
+<p><b>Double-click a file name to select it.</b></p>
+<input type="hidden" id="current_folder" value="{{ directory_details.get_current_directory }}" />	    
+<input type="hidden" id="current_sort" value="{{ directory_details.sort_field }}" />	    
+    
+    
+<div id="choose_file_div" style="padding:5px;">
+    <table border="0" width="350" cellspacing="0" cellpadding="5">
+        <tr>
+            <th>&nbsp;</th>
+            <th><a rel="name" class="lnk_sort_col">file name</a></th>
+            <th><a rel="fsize" class="lnk_sort_col">file size</a></th>
+            <th><a rel="mod_datetime" class="lnk_sort_col">modification date</a></th>
+            <th><a rel="mod_datetime" class="lnk_sort_col">modification time</a></th>
+        </tr>
+        {% for item in directory_details.dir_contents %}
+        <tr>
+            {% if item.ext_str_class %}
+                <td class="{{ item.ext_str_class }}"><a rel="{{ item.name }}" class="lnk_choose_file">&nbsp;&nbsp;</a></td><!--img src="/media-mcb/jqueryFileTree/images/picture.png" /-->
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+            {% if item.is_directory %}
+                <td><a rel="{{ item.get_file_or_dir_path }}" class="lnk_choose_folder">{{ item.name }}</a></td>
+            {% else %}
+                {% if item.is_image_file %}
+                    <td><a rel="{{ item.get_file_or_dir_path }}" class="lnk_choose_file lnk_choose_img_file">{{ item.name }}</a></td>
+                {% else %}
+                    <td><a rel="{{ item.get_file_or_dir_path }}" class="lnk_choose_file">{{ item.name }}</a></td>
+                {% endif %}
+            {% endif %}
+            <td style="text-align:right;">{{ item.fsize|intcomma }}</td>
+            <td style="text-align:right;">{{ item.mod_datetime|date:"n/d/Y" }}</td>
+            <td style="text-align:right;">{{ item.mod_datetime|date:"f:s a" }}</td>
+    
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
