@@ -84,7 +84,8 @@ class DirectoryDetails:
     
     def evaluate_directory_name(self):
         if self.dirname is None:
-            self.dirname = ''
+            # continues, will become base of settings.CKEDITOR_UPLOAD_PATH
+            self.dirname = ''   
         
         # Make sure the CKEDITOR_UPLOAD_PATH exists
         if not os.path.isdir(settings.CKEDITOR_UPLOAD_PATH):
@@ -93,8 +94,8 @@ class DirectoryDetails:
         # Join the CKEDITOR_UPLOAD_PATH and specified directory
         full_dirname = os.path.join(settings.CKEDITOR_UPLOAD_PATH, self.dirname)
         
-        # remove attempts to move the path upwards
-        #       remove an attempt such as "?d=imgs/../../other_dir/../"
+        # remove attempts to move the path above the CKEDITOR_UPLOAD_PATH
+        # e.g. remove an attempt such as "?d=imgs/../../other_dir/../"
         full_dirname = os.path.abspath(full_dirname)     
         if not full_dirname.startswith(settings.CKEDITOR_UPLOAD_PATH):
             full_dirname = settings.CKEDITOR_UPLOAD_PATH
@@ -115,11 +116,15 @@ class DirectoryDetails:
         
         self.evaluate_directory_name()
 
-        # list directory items, remove items starting with a '.'
-        items = os.listdir(self.full_dirname)   # get 
-        items = filter(lambda x: not x.startswith('.'), items)
+        # list directory items
+        # remove items starting with '.' or ending with '.py'
+        items = os.listdir(self.full_dirname)   
+        items = filter(lambda x: not (x.startswith('.') or x.endswith('.py')), items)
 
         self.dir_contents = []      # initialize array
+        
+        # add files and directories to the list, 
+        # including file type, modification date, and size
         for item in items:
             fullpath = os.path.join(self.full_dirname, item)
             stats = os.stat(fullpath)
@@ -141,6 +146,8 @@ class DirectoryDetails:
         self.num_items = len(self.dir_contents)
 
     def sort_directory_contents(self):
+        # sort the directory contents (array of DirectoryItem objects)
+        # based on the sort_field
         if self.sort_field is None:
             self.sort_field = ''
             return

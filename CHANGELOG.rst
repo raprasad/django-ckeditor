@@ -34,7 +34,7 @@ Changelog
 0.0.3
 -----
 #. More robust PIL import. Thanks `buchuki <http://github.com/buchuki>`_ .
-#. Better CKEDITOR_MEDIA_PREFIX setting error.
+#. Better CKEDITOR_UPLOADED_MEDIA_PREFIX setting error.
 
 0.0.2
 -----
@@ -42,5 +42,5 @@ Changelog
 
 0.0.1
 -----
-#. Added CKEDITOR_UPLOAD_PREFIX setting. Thanks `chr15m <http://github.com/chr15m>`_ for the input.
+#. Added CKEDITOR_UPLOADED_MEDIA_PREFIX setting. Thanks `chr15m <http://github.com/chr15m>`_ for the input.
 
