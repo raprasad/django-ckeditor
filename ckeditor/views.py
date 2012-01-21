@@ -208,12 +208,6 @@ def get_image_browse_urls(user=None):
         if len(images)==10: break
     return images
 
-def xbrowse(request):
-    context = RequestContext(request, {
-      'images': get_image_browse_urls(request.user),
-      'media_prefix': settings.CKEDITOR_MEDIA_URL,
-    })
-    return render_to_response('browse_orig.html', context)
 
 def get_json_str_as_http_response2(request, success, msg, json_str='', callback=None):
     """ Return a JSON object with the HTTP Response """
@@ -265,11 +259,6 @@ def browse_ajax(request, callback=None):
     
     lu = {'directory_details' : DirectoryDetails(dirname, sort_field=sort_field) }
     
-    #context = RequestContext(request, {
-    #    'directory_contents' : get_directory_contents('imgs/news/thumb'),
-    #    'current_folder' : dirname
-    #})
-    
     dir_files_html = render_to_string_remove_spaces('browse_ajax.html', lu)
     
     return get_json_str_as_http_response2(request, True, msg='', json_str=',"dir_files_html" : %s' % simplejson.dumps(dir_files_html), callback=callback)
@@ -280,8 +269,6 @@ def browse(request, dirname=''):
 
     context = RequestContext(request, {
         'directory_details' : DirectoryDetails('')  #imgs/news/thumb
-        #'images': get_image_browse_urls(request.user),
-        #'media_prefix': settings.CKEDITOR_MEDIA_URL,
         ,'current_folder' : dirname
         ,'CKEDITOR_MEDIA_URL' : settings.CKEDITOR_MEDIA_URL
         ,'CKEDITOR_UPLOADED_MEDIA_PREFIX' : settings.CKEDITOR_UPLOADED_MEDIA_PREFIX

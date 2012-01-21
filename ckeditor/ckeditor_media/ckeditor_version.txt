@@ -1,0 +1,1 @@
+> "ckeditor" directory contains ckeditor version 3.6.2

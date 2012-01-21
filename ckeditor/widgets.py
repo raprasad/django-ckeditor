@@ -13,12 +13,12 @@ from django.forms.util import flatatt
 json_encode = simplejson.JSONEncoder().encode
 
 DEFAULT_CONFIG = {
-    'skin': 'v2',
+  #  'skin': 'v2',
     'toolbar': 'Full',
-    'height': 291,
-    'width': 618,
-    'filebrowserWindowWidth': 940,
-    'filebrowserWindowHeight': 747,
+  #  'height': 291,
+  #  'width': 618,
+  #  'filebrowserWindowWidth': 940,
+  #  'filebrowserWindowHeight': 747,
 }
 
 
@@ -30,7 +30,9 @@ class CKEditorWidget(forms.Textarea):
     class Media:
         try:
             js = (
-                settings.CKEDITOR_MEDIA_URL + 'ckeditor/ckeditor.js',
+        'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js',
+        settings.CKEDITOR_MEDIA_URL + 'ckeditor/ckeditor.js',
+        settings.CKEDITOR_MEDIA_URL + 'ff_ie_fix.js'
             )
         except AttributeError:
             raise ImproperlyConfigured("django-ckeditor requires \

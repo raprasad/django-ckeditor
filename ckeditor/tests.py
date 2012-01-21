@@ -39,15 +39,15 @@ class ViewsTestCase(unittest.TestCase):
                 self.orig_CKEDITOR_RESTRICT_BY_USER
 
     def test_get_media_url(self):
-        # If provided prefix URL with CKEDITOR_MEDIA_URL.
-        settings.CKEDITOR_MEDIA_URL = '/media/ckuploads/'
+        # If provided prefix URL with CKEDITOR_UPLOADED_MEDIA_PREFIX.
+        settings.CKEDITOR_UPLOADED_MEDIA_PREFIX = '/media/ckuploads/'
         prefix_url = '/media/ckuploads/arbitrary/path/and/filename.ext'
         self.failUnless(views.get_media_url(self.test_path) == prefix_url)
 
-        # If CKEDITOR_MEDIA_URL is not provided, the media URL will fall
+        # If CKEDITOR_UPLOADED_MEDIA_PREFIX is not provided, the media URL will fall
         # back to MEDIA_URL with the difference of MEDIA_ROOT and the
         # uploaded resource's full path and filename appended.
-        settings.CKEDITOR_MEDIA_URL = None
+        settings.CKEDITOR_UPLOADED_MEDIA_PREFIX = None
         no_prefix_url = '/media/uploads/arbitrary/path/and/filename.ext'
         self.failUnless(views.get_media_url(self.test_path) == no_prefix_url)
 
