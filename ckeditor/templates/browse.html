@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title>CKEDitor | Select an image to embed</title>
 
-    <link href="{{ CKEDITOR_UPLOADED_MEDIA_PREFIX }}file_browser.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{{ CKEDITOR_MEDIA_URL }}file_browser.css" rel="stylesheet" type="text/css" media="screen" />
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 
@@ -67,7 +67,7 @@ function load_directory_contents(){
     function bind_choose_file_links(){
         $('.lnk_choose_img_file').hover(function() {
                 //alert(this.rel);
-                  lnk_img_url = '{{ CKEDITOR_MEDIA_URL }}/' + this.rel;
+                  lnk_img_url = '{{ CKEDITOR_UPLOADED_MEDIA_PREFIX }}/' + this.rel;
                   selected_img_tag = '<img src="' + lnk_img_url + '" style=\"max-width:300px;\" />';
 
                   $('#file_preview').html(selected_img_tag);
@@ -76,7 +76,7 @@ function load_directory_contents(){
       /* double-click a file name and send it to the browser */
       $('.lnk_choose_file').dblclick(function() {
             //lnk_img_url = 'http://127.0.0.1:8000/media-mcb/imgs/news/thumb/' + this.rel;
-            var embed_rel = '{{ CKEDITOR_MEDIA_URL }}/' + this.rel;            
+            var embed_rel = '{{ CKEDITOR_UPLOADED_MEDIA_PREFIX }}/' + this.rel;            
             alert(embed_rel);
             var funcNum = '2'; //getUrlParam('CKEditorFuncNum');
             window.opener.CKEDITOR.tools.callFunction(funcNum, embed_rel);
@@ -94,8 +94,8 @@ function load_directory_contents(){
 	</head>
 	<body>
 		<!-- media url: {{ MEDIA_URL }}<br />
-		CKEDITOR_UPLOADED_MEDIA_PREFIX: {{ CKEDITOR_UPLOADED_MEDIA_PREFIX }}<br />
-		CKEDITOR_MEDIA_URL: {{CKEDITOR_MEDIA_URL}} <br />
+		CKEDITOR_MEDIA_URL: {{ CKEDITOR_MEDIA_URL }}<br />
+		CKEDITOR_UPLOADED_MEDIA_PREFIX: {{CKEDITOR_UPLOADED_MEDIA_PREFIX}} <br />
 		-->
 	    <h3>File Browser: Please select a file on the server</h3>
 	        <div id="file_target"></div>

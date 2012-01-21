@@ -64,7 +64,7 @@ def get_media_url(path):
     """
     Determine system file's media URL.
     """
-    upload_prefix = getattr(settings, "CKEDITOR_MEDIA_URL", None)
+    upload_prefix = getattr(settings, "CKEDITOR_UPLOADED_MEDIA_PREFIX", None)
     if upload_prefix:
         url = upload_prefix + path.replace(settings.CKEDITOR_UPLOAD_PATH, '')
     else:
@@ -211,7 +211,7 @@ def get_image_browse_urls(user=None):
 def xbrowse(request):
     context = RequestContext(request, {
       'images': get_image_browse_urls(request.user),
-      'media_prefix': settings.CKEDITOR_UPLOADED_MEDIA_PREFIX,
+      'media_prefix': settings.CKEDITOR_MEDIA_URL,
     })
     return render_to_response('browse_orig.html', context)
 
@@ -281,9 +281,9 @@ def browse(request, dirname=''):
     context = RequestContext(request, {
         'directory_details' : DirectoryDetails('')  #imgs/news/thumb
         #'images': get_image_browse_urls(request.user),
-        #'media_prefix': settings.CKEDITOR_UPLOADED_MEDIA_PREFIX,
+        #'media_prefix': settings.CKEDITOR_MEDIA_URL,
         ,'current_folder' : dirname
-        ,'CKEDITOR_UPLOADED_MEDIA_PREFIX' : settings.CKEDITOR_UPLOADED_MEDIA_PREFIX
         ,'CKEDITOR_MEDIA_URL' : settings.CKEDITOR_MEDIA_URL
+        ,'CKEDITOR_UPLOADED_MEDIA_PREFIX' : settings.CKEDITOR_UPLOADED_MEDIA_PREFIX
     })
     return render_to_response('browse.html', context)

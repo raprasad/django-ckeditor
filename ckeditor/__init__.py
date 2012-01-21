@@ -4,14 +4,14 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 if 'ckeditor' in settings.INSTALLED_APPS:
-    # Confirm CKEDITOR_UPLOADED_MEDIA_PREFIX setting has been specified.
+    # Confirm CKEDITOR_MEDIA_URL setting has been specified.
     try:
-        settings.CKEDITOR_UPLOADED_MEDIA_PREFIX
+        settings.CKEDITOR_MEDIA_URL
     except AttributeError:
         raise ImproperlyConfigured("django-ckeditor requires \
-                CKEDITOR_UPLOADED_MEDIA_PREFIX setting. This setting specifies a URL \
+                CKEDITOR_MEDIA_URL setting. This setting specifies a URL \
                 prefix to the ckeditor JS and CSS media (not uploaded media). \
-                Make sure to use a trailing slash: CKEDITOR_UPLOADED_MEDIA_PREFIX = \
+                Make sure to use a trailing slash: CKEDITOR_MEDIA_URL = \
                 '/media/ckeditor/'")
 
     # Confirm CKEDITOR_UPLOAD_PATH setting has been specified.

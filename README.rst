@@ -16,9 +16,9 @@ Installation
 
 #. Copy the ``media/ckeditor`` directory into any directory within your media root. You can override the location in your settings (see below).
 
-#. Add a CKEDITOR_UPLOADED_MEDIA_PREFIX setting to the project's ``settings.py`` file. This setting specifies a URL prefix to the ckeditor JS and CSS media (not uploaded media). Make sure to use a trailing slash::
+#. Add a CKEDITOR_MEDIA_URL setting to the project's ``settings.py`` file. This setting specifies a URL prefix to the ckeditor JS and CSS media (not uploaded media). Make sure to use a trailing slash::
 
-    CKEDITOR_UPLOADED_MEDIA_PREFIX = "/media/ckeditor/"
+    CKEDITOR_MEDIA_URL = "/media/ckeditor/"
 
 #. Add a CKEDITOR_UPLOAD_PATH setting to the project's ``settings.py`` file. This setting specifies an absolute path to your ckeditor media upload directory. Make sure you have write permissions for the path, i.e.::
 
@@ -30,11 +30,11 @@ Installation
 
 #. Optionally, set the CKEDITOR_RESTRICT_BY_USER setting to ``True`` in the project's ``settings.py`` file (default ``False``). This restricts access to uploaded images to the uploading user (e.g. each user only sees and uploads their own images). Superusers can still see all images. **NOTE**: This restriction is only enforced within the CKEditor media browser. 
 
-#. Optionally, add a CKEDITOR_MEDIA_URL setting to the project's ``settings.py`` file. This setting specifies a URL prefix to media uploaded through ckeditor, i.e.::
+#. Optionally, add a CKEDITOR_UPLOADED_MEDIA_PREFIX setting to the project's ``settings.py`` file. This setting specifies a URL prefix to media uploaded through ckeditor, i.e.::
 
-       CKEDITOR_MEDIA_URL = "http://media.lawrence.com/media/ckuploads/
+       CKEDITOR_UPLOADED_MEDIA_PREFIX = "http://media.lawrence.com/media/ckuploads/
        
-   (If CKEDITOR_MEDIA_URL is not provided, the media URL will fall back to MEDIA_URL with the difference of MEDIA_ROOT and the uploaded resource's full path and filename appended.)
+   (If CKEDITOR_UPLOADED_MEDIA_PREFIX is not provided, the media URL will fall back to MEDIA_URL with the difference of MEDIA_ROOT and the uploaded resource's full path and filename appended.)
 
 #. Optionally, add CKEDITOR_CONFIGS setting to the project's ``settings.py`` file. This specifies sets of CKEditor settings that are passed to CKEditor (see CKEditor's `Setting Configurations <http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Setting_Configurations>`_), i.e.::
 

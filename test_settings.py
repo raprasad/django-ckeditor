@@ -4,5 +4,5 @@ INSTALLED_APPS = [
     'ckeditor',
 ]
 
-CKEDITOR_UPLOADED_MEDIA_PREFIX = '/media/'
+CKEDITOR_MEDIA_URL = '/media/'
 CKEDITOR_UPLOAD_PATH = '/tmp'
