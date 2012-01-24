@@ -1,4 +1,5 @@
 # This fork is a "hasty" fix to include browsing of uploaded files.
+
 # It also includes a fix for IE/FF issues where the "kama" theme is misaligned in the django admin.
 
 Django CKEditor
