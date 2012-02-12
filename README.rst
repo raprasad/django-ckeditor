@@ -14,6 +14,9 @@ Provides a ``RichTextField`` and ``CKEditorWidget`` utilizing CKEditor with imag
 Installation
 ------------
 
+* File icon source: http://www.abeautifulsite.net/blog/2008/03/jquery-file-tree/
+
+
 #. Install or add django-ckeditor to your python path.
 
 #. Add ``ckeditor`` to your INSTALLED_APPS setting.
