@@ -64,8 +64,6 @@ def reduce_path(full_path, path_prefix):
     reduced_path = full_path.replace(path_prefix, '')
     if reduced_path.startswith('/'):
         reduced_path = reduced_path[1:]
-    print 'reduced_path', reduced_path
-    return reduced_path
             
 def get_media_url(path):
     """
@@ -143,10 +141,6 @@ def upload(request):
     url = get_media_url(upload_filename)
     if url is None:
         return 
-    print '-' * 40
-    print 'ckeditor.views url: %s' % url
-    print 'request func: %s' % request.GET['CKEditorFuncNum']
-    print '-' * 40
     
     #return HttpResponse("""
     #<script type='text/javascript'>
