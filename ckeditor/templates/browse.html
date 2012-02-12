@@ -77,7 +77,7 @@ function load_directory_contents(){
       $('.lnk_choose_file').dblclick(function() {
             //lnk_img_url = 'http://127.0.0.1:8000/media-mcb/imgs/news/thumb/' + this.rel;
             var embed_rel = '{{ CKEDITOR_UPLOADED_MEDIA_PREFIX }}/' + this.rel;            
-            alert(embed_rel);
+            //alert(embed_rel);
             var funcNum = '2'; //getUrlParam('CKEditorFuncNum');
             window.opener.CKEDITOR.tools.callFunction(funcNum, embed_rel);
             window.close();
