@@ -32,7 +32,7 @@ class CKEditorWidget(forms.Textarea):
             js = (
         'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js',
         settings.CKEDITOR_STATIC_URL + 'ckeditor/ckeditor.js',
-        settings.CKEDITOR_STATIC_URL + 'ff_ie_fix.js'
+        settings.CKEDITOR_STATIC_URL + 'js/ff_ie_fix.js'
             )
         except AttributeError:
             raise ImproperlyConfigured("django-ckeditor requires \
