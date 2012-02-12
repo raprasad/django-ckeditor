@@ -270,7 +270,7 @@ def browse(request, dirname=''):
     context = RequestContext(request, {
         'directory_details' : DirectoryDetails('')  #imgs/news/thumb
         ,'current_folder' : dirname
-        ,'CKEDITOR_MEDIA_URL' : settings.CKEDITOR_MEDIA_URL
+        ,'CKEDITOR_STATIC_URL' : settings.CKEDITOR_STATIC_URL
         ,'CKEDITOR_UPLOADED_MEDIA_PREFIX' : settings.CKEDITOR_UPLOADED_MEDIA_PREFIX
     })
     return render_to_response('browse.html', context)

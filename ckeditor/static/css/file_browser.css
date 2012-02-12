@@ -1,0 +1,81 @@
+div, table{font-family:verdana, arial; font-size:11px; }
+#choose_file_div {overflow:scroll; height:400px; width:500px;}
+#choose_file_div table{border-right:1px solid #999; border-bottom:1px solid #999;}
+#choose_file_div table td{border-left:1px solid #999; border-top:1px solid #999;}
+#choose_file_div table th{border-left:1px solid #999; border-top:1px solid #999;}
+#choose_file_div table tr:hover{background-color:#eaeaea;}
+#choose_file_div table td a{text-decoration:underline; cursor:pointer;}
+#choose_file_div table td a:hover{color:#006699;}
+
+a.lnk_choose_folder{text-decoration:underline;  cursor:pointer;}
+a.lnk_choose_folder:hover{color:#006699;}
+
+a.lnk_sort_col{text-decoration:underline;  cursor:pointer;}
+a.lnk_sort_col:hover{color:#006699;}
+
+.ginfo{ border:1px solid green; padding:10px; width:300px;}
+
+/* Core Styles */
+#choose_file_div table td.directory { background: url(/media-mcb/file_icons/directory.png) center center no-repeat; }
+#choose_file_div table td.expanded { background: url(/media-mcb/file_icons/folder_open.png) center center no-repeat; }
+#choose_file_div table td.file { background: url(/media-mcb/file_icons/file.png) center center no-repeat; }
+#choose_file_div table td.wait { background: url(/media-mcb/file_icons/spinner.gif) center center no-repeat; }
+/* File Extensions*/
+#choose_file_div table td.ext_3gp { background: url(/media-mcb/file_icons/film.png) center center no-repeat; }
+#choose_file_div table td.ext_afp { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_afpa { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_asp { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_aspx { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_avi { background: url(/media-mcb/file_icons/film.png) center center no-repeat; }
+#choose_file_div table td.ext_bat { background: url(/media-mcb/file_icons/application.png) center center no-repeat; }
+#choose_file_div table td.ext_bmp { background: url(/media-mcb/file_icons/picture.png) center center no-repeat; }
+#choose_file_div table td.ext_c { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_cfm { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_cgi { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_com { background: url(/media-mcb/file_icons/application.png) center center no-repeat; }
+#choose_file_div table td.ext_cpp { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_css { background: url(/media-mcb/file_icons/css.png) center center no-repeat; }
+#choose_file_div table td.ext_doc { background: url(/media-mcb/file_icons/doc.png) center center no-repeat; }
+#choose_file_div table td.ext_exe { background: url(/media-mcb/file_icons/application.png) center center no-repeat; }
+#choose_file_div table td.ext_gif { background: url(/media-mcb/file_icons/picture.png) center center no-repeat; }
+#choose_file_div table td.ext_fla { background: url(/media-mcb/file_icons/flash.png) center center no-repeat; }
+#choose_file_div table td.ext_h { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_htm { background: url(/media-mcb/file_icons/html.png) center center no-repeat; }
+#choose_file_div table td.ext_html { background: url(/media-mcb/file_icons/html.png) center center no-repeat; }
+#choose_file_div table td.ext_jar { background: url(/media-mcb/file_icons/java.png) center center no-repeat; }
+#choose_file_div table td.ext_jpg { background: url(/media-mcb/file_icons/picture.png) center center no-repeat; }
+#choose_file_div table td.ext_jpeg { background: url(/media-mcb/file_icons/picture.png) center center no-repeat; }
+#choose_file_div table td.ext_js { background: url(/media-mcb/file_icons/script.png) center center no-repeat; }
+#choose_file_div table td.ext_lasso { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_log { background: url(/media-mcb/file_icons/txt.png) center center no-repeat; }
+#choose_file_div table td.ext_m4p { background: url(/media-mcb/file_icons/music.png) center center no-repeat; }
+#choose_file_div table td.ext_mov { background: url(/media-mcb/file_icons/film.png) center center no-repeat; }
+#choose_file_div table td.ext_mp3 { background: url(/media-mcb/file_icons/music.png) center center no-repeat; }
+#choose_file_div table td.ext_mp4 { background: url(/media-mcb/file_icons/film.png) center center no-repeat; }
+#choose_file_div table td.ext_mpg { background: url(/media-mcb/file_icons/film.png) center center no-repeat; }
+#choose_file_div table td.ext_mpeg { background: url(/media-mcb/file_icons/film.png) center center no-repeat; }
+#choose_file_div table td.ext_ogg { background: url(/media-mcb/file_icons/music.png) center center no-repeat; }
+#choose_file_div table td.ext_pcx { background: url(/media-mcb/file_icons/picture.png) center center no-repeat; }
+#choose_file_div table td.ext_pdf { background: url(/media-mcb/file_icons/pdf.png) center center no-repeat; }
+#choose_file_div table td.ext_php { background: url(/media-mcb/file_icons/php.png) center center no-repeat; }
+#choose_file_div table td.ext_png { background: url(/media-mcb/file_icons/picture.png) center center no-repeat; }
+#choose_file_div table td.ext_ppt { background: url(/media-mcb/file_icons/ppt.png) center center no-repeat; }
+#choose_file_div table td.ext_psd { background: url(/media-mcb/file_icons/psd.png) center center no-repeat; }
+#choose_file_div table td.ext_pl { background: url(/media-mcb/file_icons/script.png) center center no-repeat; }
+#choose_file_div table td.ext_py { background: url(/media-mcb/file_icons/script.png) center center no-repeat; }
+#choose_file_div table td.ext_rb { background: url(/media-mcb/file_icons/ruby.png) center center no-repeat; }
+#choose_file_div table td.ext_rbx { background: url(/media-mcb/file_icons/ruby.png) center center no-repeat; }
+#choose_file_div table td.ext_rhtml { background: url(/media-mcb/file_icons/ruby.png) center center no-repeat; }
+#choose_file_div table td.ext_rpm { background: url(/media-mcb/file_icons/linux.png) center center no-repeat; }
+#choose_file_div table td.ext_ruby { background: url(/media-mcb/file_icons/ruby.png) center center no-repeat; }
+#choose_file_div table td.ext_sql { background: url(/media-mcb/file_icons/db.png) center center no-repeat; }
+#choose_file_div table td.ext_swf { background: url(/media-mcb/file_icons/flash.png) center center no-repeat; }
+#choose_file_div table td.ext_tif { background: url(/media-mcb/file_icons/picture.png) center center no-repeat; }
+#choose_file_div table td.ext_tiff { background: url(/media-mcb/file_icons/picture.png) center center no-repeat; }
+#choose_file_div table td.ext_txt { background: url(/media-mcb/file_icons/txt.png) center center no-repeat; }
+#choose_file_div table td.ext_vb { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_wav { background: url(/media-mcb/file_icons/music.png) center center no-repeat; }
+#choose_file_div table td.ext_wmv { background: url(/media-mcb/file_icons/film.png) center center no-repeat; }
+#choose_file_div table td.ext_xls { background: url(/media-mcb/file_icons/xls.png) center center no-repeat; }
+#choose_file_div table td.ext_xml { background: url(/media-mcb/file_icons/code.png) center center no-repeat; }
+#choose_file_div table td.ext_zip { background: url(/media-mcb/file_icons/zip.png) center center no-repeat; }
