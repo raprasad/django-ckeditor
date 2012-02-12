@@ -59,19 +59,40 @@ def create_thumbnail(filename):
     # scale and crop to thumbnail
     imagefit = ImageOps.fit(image, THUMBNAIL_SIZE, Image.ANTIALIAS)
     imagefit.save(get_thumb_filename(filename))
-        
+
+def reduce_path(full_path, path_prefix):
+    reduced_path = full_path.replace(path_prefix, '')
+    if reduced_path.startswith('/'):
+        reduced_path = reduced_path[1:]
+    print 'reduced_path', reduced_path
+    return reduced_path
+            
 def get_media_url(path):
     """
-    Determine system file's media URL.
+    Determine the appropriate MEDIA url for the
     """
+    if path is None or not os.path.isfile(path):
+        return None
+        
+    # Does ckeditor have a specific directory for viewing?
     upload_prefix = getattr(settings, "CKEDITOR_UPLOADED_MEDIA_PREFIX", None)
-    if upload_prefix:
-        url = upload_prefix + path.replace(settings.CKEDITOR_UPLOAD_PATH, '')
+    if upload_prefix is not None:
+        # convert the file system path to the appropriate url
+        # e.g.
+        # filepath = /home/mysite/files_to_serve/media/ck_uploads/turtle.jpg
+        # CKEDITOR_UPLOAD_PATH = '/home/mysite/files_to_serve/media/ck_uploads/'
+        # CKEDITOR_UPLOADED_MEDIA_PREFIX = 'http://media.mysite.com/ck_files/
+        #
+        # result: http://media.mysite.com/ck_files/turtle.jpg
+        #
+        reduced_path = reduce_path(path, settings.CKEDITOR_UPLOAD_PATH)
+        image_url = os.path.join(upload_prefix, reduced_path) 
     else:
-        url = settings.MEDIA_URL + path.replace(settings.MEDIA_ROOT, '')
-   
-    # Remove any double slashes.
-    return url.replace('//', '/')
+        # similar to above but uses MEDIA_ROOT/MEDIA_URL
+        reduced_path = reduce_path(path, settings.MEDIA_ROOT)
+        image_url = os.path.join(settings.MEDIA_URL, reduced_path)
+    
+    return image_url
 
 def get_upload_filename(upload_name, user):
     # If CKEDITOR_RESTRICT_BY_USER is True upload file to user specific path.
@@ -120,11 +141,29 @@ def upload(request):
 
     # Respond with Javascript sending ckeditor upload url.
     url = get_media_url(upload_filename)
+    if url is None:
+        return 
+    print '-' * 40
+    print 'ckeditor.views url: %s' % url
+    print 'request func: %s' % request.GET['CKEditorFuncNum']
+    print '-' * 40
+    
+    #return HttpResponse("""
+    #<script type='text/javascript'>
+    #   var funcNum = '2'; //getUrlParam('CKEditorFuncNum');
+    #   window.parent.CKEDITOR.tools.callFunction(%s, '%s');
+    #</script>""" % (funcNum, url))
+    
     return HttpResponse("""
     <script type='text/javascript'>
         window.parent.CKEDITOR.tools.callFunction(%s, '%s');
     </script>""" % (request.GET['CKEditorFuncNum'], url))
 
+    '''
+       var funcNum = '2'; //getUrlParam('CKEditorFuncNum');
+        window.opener.CKEDITOR.tools.callFunction(funcNum, embed_rel);
+        window.close();
+    '''
 def get_image_files(user=None):
     """
     Recursively walks all dirs under upload dir and generates a list of
