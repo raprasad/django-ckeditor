@@ -6,7 +6,7 @@ It also includes a fix for IE/FF issues where the "kama" theme is misaligned in 
 
 ### Django admin CKEditor integration.
 
-Provides a RichTextField`` and ``CKEditorWidget`` utilizing CKEditor with image upload and browsing support included.
+Provides a RichTextField and CKEditorWidget utilizing CKEditor with image upload and browsing support included.
 
 ### Installation
 
@@ -29,6 +29,7 @@ File icon source: [http://www.abeautifulsite.net/blog/2008/03/jquery-file-tree/]
     
     (r'^ckeditor/', include('ckeditor.urls')),    
 
+1. run manage.py collectstatic
 1. Optionally, add CKEDITOR_CONFIGS setting to the project's ``settings.py`` file. This specifies sets of CKEditor settings that are passed to CKEditor (see CKEditor's `Setting Configurations <http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Setting_Configurations>`_), i.e.::
 
        CKEDITOR_CONFIGS = {
