@@ -19,10 +19,9 @@ Installation
 
 #. Install or add django-ckeditor to your python path.
 
-#. Add ``ckeditor`` to your INSTALLED_APPS setting.
+#. Add "ckeditor" to your INSTALLED_APPS setting.
 
 #. In your project's settings.py, add the following attributes:
-
     * CKEDITOR_STATIC_URL -  Specifies a URL prefix to the ckeditor JS and CSS media (not uploaded media). Make sure to use a trailing slash
         * CKEDITOR_STATIC_URL = "media.myprojectsite.com/media/ckeditor/"
     
