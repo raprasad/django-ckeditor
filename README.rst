@@ -23,12 +23,14 @@ Installation
 
 #. In your project's settings.py, add the following attributes:
     * CKEDITOR_STATIC_URL -  Specifies a URL prefix to the ckeditor JS and CSS media (not uploaded media). Make sure to use a trailing slash
-    ** CKEDITOR_STATIC_URL = "media.myprojectsite.com/media/ckeditor/"
+        * CKEDITOR_STATIC_URL = "media.myprojectsite.com/media/ckeditor/"
+    
     * CKEDITOR_UPLOAD_PATH - Specifies an absolute path to your ckeditor media upload directory. Make sure you have write permissions for the path, i.e.::
-    ** CKEDITOR_UPLOAD_PATH = "/home/media/media.myprojectsite.com/ckeditor/uploads"
+        * CKEDITOR_UPLOAD_PATH = "/home/media/media.myprojectsite.com/ckeditor/uploads"
+    
     * CKEDITOR_UPLOADED_MEDIA_PREFIX - specifies a URL prefix to media uploaded through ckeditor
-    ** e.g. CKEDITOR_UPLOADED_MEDIA_PREFIX = "http://media.myprojectsite.com/media/ckeditor/uploads'
-    ** (If CKEDITOR_UPLOADED_MEDIA_PREFIX is not provided, the media URL will fall back to MEDIA_URL with the difference of MEDIA_ROOT and the uploaded resource's full path and filename appended.)
+        * e.g. CKEDITOR_UPLOADED_MEDIA_PREFIX = "http://media.myprojectsite.com/media/ckeditor/uploads'
+        * (If CKEDITOR_UPLOADED_MEDIA_PREFIX is not provided, the media URL will fall back to MEDIA_URL with the difference of MEDIA_ROOT and the uploaded resource's full path and filename appended.)
 
 #. In your project's urls.py, add the following:
     
