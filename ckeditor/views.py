@@ -61,10 +61,12 @@ def create_thumbnail(filename):
     imagefit.save(get_thumb_filename(filename))
 
 def reduce_path(full_path, path_prefix):
+    
     reduced_path = full_path.replace(path_prefix, '')
     if reduced_path.startswith('/'):
         reduced_path = reduced_path[1:]
-            
+    return reduced_path
+    
 def get_media_url(path):
     """
     Determine the appropriate MEDIA url for the
